@@ -39,11 +39,12 @@ CREATE TABLE category(
 使用纯 SQL 编码通常是使用自连接，假设实际树结构分四层（如上图），则编码如下：
 ```
 SELECT t1.name AS lev1, t2.name as lev2, t3.name as lev3, t4.name as lev4
-FROM category AS t1
-LEFT JOIN category AS t2 ON t2.parent = t1.category_id
-LEFT JOIN category AS t3 ON t3.parent = t2.category_id
-LEFT JOIN category AS t4 ON t4.parent = t3.category_id
-WHERE t1.name = 'ELECTRONICS';
+    FROM 
+    category AS t1
+        LEFT JOIN category AS t2 ON t2.parent = t1.category_id
+        LEFT JOIN category AS t3 ON t3.parent = t2.category_id
+        LEFT JOIN category AS t4 ON t4.parent = t3.category_id
+    WHERE t1.name = 'ELECTRONICS';
 
 +-------------+----------------------+--------------+-------+
 | lev1        | lev2                 | lev3         | lev4  |
@@ -68,11 +69,11 @@ WHERE t1.name = 'ELECTRONICS';
 同样使用 SQL 的自连接
 ```
 SELECT t1.name AS lev1, t2.name as lev2, t3.name as lev3, t4.name as lev4
-FROM category AS t1
-LEFT JOIN category AS t2 ON t2.parent = t1.category_id
-LEFT JOIN category AS t3 ON t3.parent = t2.category_id
-LEFT JOIN category AS t4 ON t4.parent = t3.category_id
-WHERE t1.name = 'ELECTRONICS' AND t4.name = 'FLASH';
+    FROM category AS t1
+        LEFT JOIN category AS t2 ON t2.parent = t1.category_id
+        LEFT JOIN category AS t3 ON t3.parent = t2.category_id
+        LEFT JOIN category AS t4 ON t4.parent = t3.category_id
+    WHERE t1.name = 'ELECTRONICS' AND t4.name = 'FLASH';
 
 +-------------+----------------------+-------------+-------+
 | lev1        | lev2                 | lev3        | lev4  |
@@ -186,3 +187,5 @@ SELECT parent.name
     2、删除节点更加麻烦
     3、不允许多个父类
     4、~~~
+    
+**Q3**:尝试实现一个新的categoryService,使用嵌套模型去完善add, getTree, findCategoryBreadcrumbs, delete等方法。
