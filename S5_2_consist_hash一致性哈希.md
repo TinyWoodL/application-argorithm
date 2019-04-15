@@ -26,7 +26,7 @@
 一致性哈希对 2^32 取模，即将整个 hash 空间构成一个虚拟的圆环，如下图所示：
 
 <img src="https://github.com/TinyWoodL/application-argorithm/blob/master/assets/hash-1.jpg?raw=true">
- 
+
 这样我们对每个缓存服务器使用 hash 进行一个哈希（如使用ip或者主机名），最后所有的服务器都分布在环上。
 这样，我们只要使用相同的 hash 算法对数据的 key 进行计算，得到此数据在环上的位置，从此位置沿环顺时针遇到的第一台服务器就是定位的服务器。寻址过程如下图所示：
 
